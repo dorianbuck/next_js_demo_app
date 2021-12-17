@@ -1,12 +1,10 @@
 import styles from "../../styles/Admin.module.css";
 import AuthCheck from "../../components/AuthCheck";
 import { firestore, auth, serverTimestamp } from "../../lib/firebase";
-
 import { useState } from "react";
 import { useRouter } from "next/router";
-
 import { useDocumentData } from "react-firebase-hooks/firestore";
-import { useForm } from "react-hook-form";
+import { useForm, useFormState } from "react-hook-form";
 import ReactMarkdown from "react-markdown";
 import Link from "next/link";
 import toast from "react-hot-toast";
@@ -63,9 +61,16 @@ function PostManager() {
 }
 
 function PostForm({ defaultValues, postRef, preview }) {
-  const { register, handleSubmit, reset, watch } = useForm({
-    defaultValues,
-    mode: "onChange",
+  const {
+    register,
+    handleSubmit,
+    reset,
+    watch,
+    formState: { errors },
+    control,
+  } = useForm({ defaultValues, mode: "onChange" });
+  const { isValid, isDirty } = useFormState({
+    control,
   });
 
   const updatePost = async ({ content, published }) => {
@@ -89,7 +94,23 @@ function PostForm({ defaultValues, postRef, preview }) {
       )}
 
       <div className={preview ? styles.hidden : styles.controls}>
-        <textarea name="content" {...register("content")}></textarea>
+        <textarea
+          name="content"
+          {...register("content", {
+            required: "content is required",
+            maxLength: {
+              value: 20000,
+              message: "content is too long",
+            },
+            minLength: {
+              value: 10,
+              message: "content is too short",
+            },
+          })}
+        ></textarea>
+        {errors.content && errors.content.type === "required" && (
+          <span>This is required</span>
+        )}
 
         <fieldset>
           <input
@@ -100,7 +121,7 @@ function PostForm({ defaultValues, postRef, preview }) {
           <label>Published</label>
         </fieldset>
 
-        <button type="submit" className="btn-green">
+        <button type="submit" disabled={!isDirty || !isValid}>
           Save Changes
         </button>
       </div>
