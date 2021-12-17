@@ -5,6 +5,7 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 import { useDocumentData } from "react-firebase-hooks/firestore";
 import { useForm, useFormState } from "react-hook-form";
+import ImageUploader from "../../components/ImageUploader";
 import ReactMarkdown from "react-markdown";
 import Link from "next/link";
 import toast from "react-hot-toast";
@@ -92,7 +93,7 @@ function PostForm({ defaultValues, postRef, preview }) {
           <ReactMarkdown>{watch("content")}</ReactMarkdown>
         </div>
       )}
-
+      <ImageUploader />
       <div className={preview ? styles.hidden : styles.controls}>
         <textarea
           name="content"
