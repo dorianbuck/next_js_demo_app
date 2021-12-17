@@ -89,14 +89,13 @@ function PostForm({ defaultValues, postRef, preview }) {
       )}
 
       <div className={preview ? styles.hidden : styles.controls}>
-        <textarea name="content" ref={register}></textarea>
+        <textarea name="content" {...register("content")}></textarea>
 
         <fieldset>
           <input
             className={styles.checkbox}
-            name="published"
             type="checkbox"
-            ref={register}
+            {...register("published")}
           />
           <label>Published</label>
         </fieldset>
