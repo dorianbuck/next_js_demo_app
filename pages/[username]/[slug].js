@@ -1,4 +1,5 @@
 import styles from "../../styles/Post.module.css";
+import AuthCheck from "../../components/AuthCheck";
 import PostContent from "../../components/PostContent";
 import { firestore, getUserWithUsername, postToJSON } from "../../lib/firebase";
 import { UserContext } from "../../lib/context";
@@ -77,9 +78,9 @@ export default function Post(props) {
           }
         >
           <HeartButton postRef={postRef} />
-        </AuthCheck> */}
+        </AuthCheck>
 
-        {/* {currentUser?.uid === post.uid && (
+        {currentUser?.uid === post.uid && (
           <Link href={`/admin/${post.slug}`}>
             <button className="btn-blue">Edit Post</button>
           </Link>

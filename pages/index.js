@@ -1,13 +1,13 @@
-import { useState } from "react";
-import Head from "next/head";
-import styles from "../styles/Home.module.css";
-import Link from "next/link";
-import toast from "react-hot-toast";
+// import Head from "next/head";
+// import styles from "../styles/Home.module.css";
+// import Link from "next/link";
+// import toast from "react-hot-toast";
 import Metatags from "../components/Metatags";
 import Loader from "../components/Loader";
 import PostFeed from "../components/PostFeed";
 import { firestore, fromMillis, postToJSON } from "../lib/firebase";
 
+import { useState } from "react";
 
 // Max post to query per page
 const LIMIT = 10;
