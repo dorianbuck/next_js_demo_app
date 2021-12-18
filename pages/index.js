@@ -1,7 +1,3 @@
-// import Head from "next/head";
-// import styles from "../styles/Home.module.css";
-// import Link from "next/link";
-// import toast from "react-hot-toast";
 import Metatags from "../components/Metatags";
 import Loader from "../components/Loader";
 import PostFeed from "../components/PostFeed";
