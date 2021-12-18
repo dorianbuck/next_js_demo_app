@@ -1,5 +1,6 @@
 import styles from "../../styles/Post.module.css";
 import AuthCheck from "../../components/AuthCheck";
+import HeartButton from "../../components/HeartButton";
 import PostContent from "../../components/PostContent";
 import { firestore, getUserWithUsername, postToJSON } from "../../lib/firebase";
 import { UserContext } from "../../lib/context";
@@ -70,7 +71,7 @@ export default function Post(props) {
           <strong>{post.heartCount || 0} 🤍</strong>
         </p>
 
-        {/* <AuthCheck
+        <AuthCheck
           fallback={
             <Link href="/enter">
               <button>💗 Sign Up</button>
@@ -84,7 +85,7 @@ export default function Post(props) {
           <Link href={`/admin/${post.slug}`}>
             <button className="btn-blue">Edit Post</button>
           </Link>
-        )} */}
+        )}
       </aside>
     </main>
   );
